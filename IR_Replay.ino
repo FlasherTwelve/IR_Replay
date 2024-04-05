@@ -1,11 +1,41 @@
-#include <M5StickCPlus2.h>
+/* =-=-=-= Uncomment your device =-=-=-= */
+// #define STICK_C_PLUS
+// #define STICK_C_PLUS2
+/* =-=-= Default is STICK_C_PLUS2 =-=-= */
+
+/* =-=-= Select your custom pins =-=-= */
+// #define IR_RECV_PIN 26
+// #define IR_LED_PIN 9
+/* =-=-= Only if you really need =-=-= */
+
+/* -- Loading libs -- */
 #include <IRremoteESP8266.h>
 #include <IRrecv.h>
 #include <IRsend.h>
 
+#if defined(STICK_C_PLUS)
+  #include <M5StickCPlus.h>
+
+  #ifndef IR_RECV_PIN
+    #define IR_RECV_PIN 26
+  #endif
+
+  #ifndef IR_LED_PIN
+    #define IR_LED_PIN 9
+  #endif
+#else
+  #include <M5StickCPlus2.h>
+
+  #ifndef IR_RECV_PIN
+    #define IR_RECV_PIN 26
+  #endif
+
+  #ifndef IR_LED_PIN
+    #define IR_LED_PIN 19
+  #endif
+#endif
+
 #define MAX_RAWBUF_SIZE 100
-#define IR_RECV_PIN 33 // Receiver Pin
-#define IR_LED_PIN 26 // 26 // Sender Pin
 
 IRrecv irrecv(IR_RECV_PIN);
 IRsend irsend(IR_LED_PIN);
