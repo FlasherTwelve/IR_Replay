@@ -7,7 +7,7 @@ Firmware for Replay IR codes using an M5Stack Mini Infrared Emitter & Receiver U
 
 Using the firmware is very simple. After capturing the IR you want to replicate, press the B button on your Stick, this way, you will switch to sender mode. From sender mode, you can send the captured IR from button A, you can send the IR as many times as you want, there is no need to capture the code again. To change the mode again, simply press button B again.
 
-# Using custom emitter/transmitter
+## Using custom emitter/transmitter
 
 In the main .ino file, change the following constants:
 
