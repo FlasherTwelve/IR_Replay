@@ -1,11 +1,19 @@
-#include <M5StickCPlus2.h>
 #include <IRremoteESP8266.h>
 #include <IRrecv.h>
 #include <IRsend.h>
 
+// Uncomment line below your if you're using StickCPlus 1.1
+// #define STICK_C_PLUS
+
+#if defined(STICK_C_PLUS)
+  #include <M5StickCPlus.h>
+#else
+  #include <M5StickCPlus2.h>
+#endif
+
 #define MAX_RAWBUF_SIZE 100
-#define IR_RECV_PIN 33 // Receiver Pin
-#define IR_LED_PIN 26 // 26 // Sender Pin
+#define IR_RECV_PIN 33 // Receiver Pin (default for M5Stack official IR module is 33)
+#define IR_LED_PIN 26 // Sender Pin (default for M5Stack official IR module is 32)
 
 IRrecv irrecv(IR_RECV_PIN);
 IRsend irsend(IR_LED_PIN);
@@ -131,7 +139,7 @@ void drawScreen() {
   M5.Lcd.drawString(textScreen.message, x, y);
   
   M5.Lcd.setTextColor(0xB4B4B4);
-  M5.Lcd.drawString("Press B to switch", x, 110); // Desenha o segundo texto centralizado na tela
+  M5.Lcd.drawString("Press B to switch", x, 110);
 }
 
 // Method to receive the IR Signal
@@ -162,7 +170,7 @@ void receiveSignal() {
   }
 }
 
-// Method to send/replay the IR Signal (Raw)
+// Method to send/replay the IR Signal (raw)
 void sendSignal() {
   state.currentState = SENDER_SENDED;
   drawScreen();
